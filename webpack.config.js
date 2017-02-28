@@ -1,5 +1,5 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = require('./htmlWebpackPluginConfig');
+// var HTMLWebpackPluginConfig = require('./htmlWebpackPluginConfig');
 // var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 // 	inject: 'body',
 // 	template: __dirname + "/app/index.html",
@@ -7,16 +7,13 @@ var HTMLWebpackPluginConfig = require('./htmlWebpackPluginConfig');
 // });
 
 module.exports = {
-	// entry: {
-	// 	'index': ['./app/index.js', './app/main.scss'],
-	// 	'materials': ['./app/examples/materials/materials.js', './app/examples/materials/materials.scss']
-	// },
-	entry: [
-		'./app/index.js', './app/main.scss'
-	],
+	entry: {
+		'index': ['./app/index.js', './app/main.scss'],
+		'materials': ['./app/examples/materials/materials.js', './app/examples/materials/materials.scss']
+	},
 	output: {
 		path: `${__dirname}/dist`,
-		filename: '[name].js'
+		filename: '[name]/[name].js'
 	},
 	module: {
 			rules: [
@@ -26,5 +23,18 @@ module.exports = {
 					}
 			]
 	},
-	plugins: HTMLWebpackPluginConfig
+	plugins: [
+		new HTMLWebpackPlugin({
+			inject: 'body',
+			template: __dirname + '/app/index.html',
+			filename: 'index.html',
+			chunks: ['index']
+		}),
+		new HTMLWebpackPlugin({
+			inject: 'body',
+			template: __dirname + '/app/examples/materials/materials.html',
+			filename: 'examples/materials/materials.html',
+			chunks: ['materials']
+		})
+	]
 };

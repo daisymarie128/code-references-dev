@@ -1,5 +1,6 @@
-# Basic prototyping boilerplate - release-1.0
-This is a boilerplate made for quick prototyping using es6 and scss.
+## Code Refrences
+This will be a collection of code examples I've made for my own reference. <br>
+In particular it will be a reference for visual code examples, like threejs and canvas/animation libraries.
 
 ### How to run
 `npm install`<br>
@@ -15,7 +16,7 @@ Visit http://localhost:8800/
 
 ## Tools used:
 [NPM](https://www.npmjs.com/)<br>
-[Webpack](https://webpack.github.io/)<br>
+[Webpack 2](https://webpack.js.org/)<br>
 [ES6]<br>
 [BABEL](https://babeljs.io/)<br>
 [SCSS]
