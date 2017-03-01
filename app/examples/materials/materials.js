@@ -27,11 +27,18 @@ import {
 	AmbientLight,
 	DoubleSide,
 	FlatShading,
+	TextureLoader,
+	NearestFilter,
+	RepeatWrapping,
+	SphericalReflectionMapping,
 } from 'three';
 
 const init = () => {
 	this.stage = new SceneHolder();
 	this.stage.start();
+	this.stage.renderer.gammaInput = true;
+	this.stage.renderer.gammaOutput = true;
+	this.time = 0;
 	createLights();
 	createFloor();
 	createControls();
@@ -40,7 +47,7 @@ const init = () => {
 	const blue = new Color('#293abc');
 
 	// GEOMETRY
-	const geometry = new SphereGeometry(35, 20, 20);
+	const geometry = new SphereGeometry(35, 40, 10);
 
 	// MATERIALS
 	const material = new MeshBasicMaterial({ color: purple });
@@ -88,6 +95,41 @@ const init = () => {
 		emissiveIntensity: 0.2,
 	});
 
+	// CUSTOM materials
+	const glossy = new MeshStandardMaterial({
+		color: purple,
+		metalness: 1,
+		roughness: 0,
+	});
+
+	const envMap = new TextureLoader().load('../../assets/textures/glossy.png');
+	envMap.mapping = SphericalReflectionMapping;
+	glossy.envMap = envMap;
+
+	const glossyRough = new MeshStandardMaterial({
+		color: purple,
+		metalness: 1,
+		roughness: 1,
+	});
+
+	const roughnessMap = new TextureLoader().load('../../assets/textures/roughness.png');
+	glossyRough.envMap = envMap;
+	roughnessMap.magFilter = NearestFilter;
+	glossyRough.roughnessMap = roughnessMap;
+
+	const alphaMaterial = new MeshStandardMaterial({
+		color: purple,
+		transparent: true,
+		side: DoubleSide,
+		alphaTest: 0.5,
+	});
+
+	var alphaMap = new TextureLoader().load('../../assets/textures/aplha.png');
+	alphaMaterial.alphaMap = alphaMap;
+	alphaMaterial.alphaMap.magFilter = NearestFilter;
+	alphaMaterial.alphaMap.wrapT = RepeatWrapping;
+	alphaMaterial.alphaMap.repeat.y = 1;
+
 	// TODO: Refactor into loop
 	const sphere = new Mesh(geometry, normalMaterial);
 	const sphere2 = new Mesh(geometry, lambertMaterial);
@@ -124,6 +166,27 @@ const init = () => {
 	this.stage.scene.add(sphere7);
 	this.stage.scene.add(sphere8);
 	this.stage.scene.add(sphere9);
+
+
+	// custom material objects
+	const sphere10 = new Mesh(geometry, glossy);
+	const sphere11 = new Mesh(geometry, glossyRough);
+	this.sphere12 = new Mesh(geometry, alphaMaterial);
+
+	sphere10.position.x = -80;
+	sphere11.position.x = 0;
+	this.sphere12.position.x = 80;
+
+	sphere10.position.z = -160;
+	sphere11.position.z = -160;
+	this.sphere12.position.z = -160;
+
+	sphere11.rotation.z = -45;
+	this.sphere12.rotation.z = -45;
+
+	this.stage.scene.add(sphere10);
+	this.stage.scene.add(sphere11);
+	this.stage.scene.add(this.sphere12);
 };
 
 const createLights = () => {
@@ -161,6 +224,8 @@ const onWindowResize = () => {
 };
 
 const animate = () => {
+	this.time++;
+	this.sphere12.material.alphaMap.offset.y = this.time * 0.002;
 	requestAnimationFrame(animate);
 	render();
 };
