@@ -8,7 +8,7 @@ export default class SceneHolder {
 	init() {
 		const container = document.getElementById('container');
 		this.camera = new PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-		this.camera.position.z = 400;
+		// this.camera.position.z = 400;
 		this.scene = new Scene();
 		this.renderer = new WebGLRenderer();
 		this.renderer.setPixelRatio(window.devicePixelRatio);

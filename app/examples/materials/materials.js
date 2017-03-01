@@ -36,6 +36,9 @@ import {
 const init = () => {
 	this.stage = new SceneHolder();
 	this.stage.start();
+	this.stage.camera.position.x = 100;
+	this.stage.camera.position.y = 400;
+	this.stage.camera.position.z = 200;
 	this.stage.renderer.gammaInput = true;
 	this.stage.renderer.gammaOutput = true;
 	this.time = 0;
@@ -187,6 +190,8 @@ const init = () => {
 	this.stage.scene.add(sphere10);
 	this.stage.scene.add(sphere11);
 	this.stage.scene.add(this.sphere12);
+
+	// this.stage.camera.lookAt(sphere5.position);
 };
 
 const createLights = () => {
