@@ -13,7 +13,7 @@ module.exports = {
 	},
 	output: {
 		path: `${__dirname}/dist`,
-		filename: '[name]/[name].js'
+		filename: 'js/[name].js'
 	},
 	module: {
 			rules: [
@@ -33,7 +33,7 @@ module.exports = {
 		new HTMLWebpackPlugin({
 			inject: 'body',
 			template: __dirname + '/app/examples/materials/materials.html',
-			filename: 'examples/materials/materials.html',
+			filename: 'examples/materials/index.html',
 			chunks: ['materials']
 		})
 	]
