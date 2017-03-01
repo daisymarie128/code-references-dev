@@ -26,6 +26,7 @@ import {
 	DirectionalLight,
 	AmbientLight,
 	DoubleSide,
+	FlatShading,
 } from 'three';
 
 const init = () => {
@@ -44,6 +45,13 @@ const init = () => {
 	// MATERIALS
 	const material = new MeshBasicMaterial({ color: purple });
 	const normalMaterial = new MeshNormalMaterial();
+	const wireFrameMaterial = new MeshNormalMaterial();
+	wireFrameMaterial.wireframe = true;
+
+	const flatMaterial = new MeshLambertMaterial({
+		color: purple,
+		shading: FlatShading,
+	});
 
 	const lambertMaterial = new MeshLambertMaterial({
 		color: purple,
@@ -88,17 +96,24 @@ const init = () => {
 	const sphere5 = new Mesh(geometry, physicalMaterial);
 	const sphere6 = new Mesh(geometry, standardMaterial);
 	const sphere7 = new Mesh(geometry, toonMaterial);
+	const sphere8 = new Mesh(geometry, wireFrameMaterial);
+	const sphere9 = new Mesh(geometry, flatMaterial);
 
 	sphere.position.x = -80;
 	sphere2.position.x = 0;
 	sphere3.position.x = 80;
 	sphere4.position.x = 160;
-	sphere6.position.x = -80;
-	sphere7.position.x = 0;
+	sphere5.position.x = -80;
+	sphere6.position.x = 0;
+	sphere7.position.x = 80;
+	sphere8.position.x = 160;
+	sphere9.position.x = -80;
 
 	sphere5.position.z = -80;
 	sphere6.position.z = -80;
 	sphere7.position.z = -80;
+	sphere8.position.z = -80;
+	sphere9.position.z = -80;
 
 	this.stage.scene.add(sphere);
 	this.stage.scene.add(sphere2);
@@ -107,6 +122,8 @@ const init = () => {
 	this.stage.scene.add(sphere5);
 	this.stage.scene.add(sphere6);
 	this.stage.scene.add(sphere7);
+	this.stage.scene.add(sphere8);
+	this.stage.scene.add(sphere9);
 };
 
 const createLights = () => {
