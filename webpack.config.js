@@ -1,10 +1,4 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-// var HTMLWebpackPluginConfig = require('./htmlWebpackPluginConfig');
-// var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-// 	inject: 'body',
-// 	template: __dirname + "/app/index.html",
-// 	output: 'index.html'
-// });
 
 module.exports = {
 	entry: {
@@ -17,10 +11,15 @@ module.exports = {
 	},
 	module: {
 			rules: [
-					{
-							test: /\.scss$/,
-							use: ['style-loader', 'css-loader', 'sass-loader'],
-					}
+				{
+     test: /\.js$/,
+     exclude: /node_modules/,
+     loader: 'babel-loader',
+    },
+				{
+						test: /\.scss$/,
+						use: ['style-loader', 'css-loader', 'sass-loader'],
+				}
 			]
 	},
 	plugins: [
