@@ -25,11 +25,13 @@
     "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.9.0",
     "node-sass": "^3.10.1",
+    "orbit-controls-es6": "^1.0.8",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "eslint": "^3.16.1",
     "three": "^0.84.0"
   }
 }
