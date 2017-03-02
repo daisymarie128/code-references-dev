@@ -7,7 +7,8 @@ module.exports = {
 		'index': [
 			'./app/index.js', './app/main.scss'
 		],
-		'materials': ['./app/examples/materials/materials.js', './app/examples/materials/materials.scss']
+		'materials': ['./app/examples/materials/materials.js', './app/examples/materials/materials.scss'],
+		'moving-floor': ['./app/examples/moving-floor/moving-floor.js', './app/examples/moving-floor/moving-floor.scss']
 	},
 	output: {
 		path: `${__dirname}/dist`,
@@ -44,6 +45,12 @@ module.exports = {
 			template: `${__dirname}/app/examples/materials/materials.html`,
 			filename: 'examples/materials/index.html',
 			chunks: ['materials']
+		}),
+		new HTMLWebpackPlugin({
+			inject: 'body',
+			template: `${__dirname}/app/examples/moving-floor/moving-floor.html`,
+			filename: 'examples/moving-floor/index.html',
+			chunks: ['moving-floor']
 		})
 	]
 };
