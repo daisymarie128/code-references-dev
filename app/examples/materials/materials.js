@@ -9,7 +9,7 @@
 
 // INTERNAL
 import SceneHolder from '../../modules/scene';
-import OrbitControls from 'orbit-controls-es6';
+import OrbitControls from 'three-orbitcontrols';
 
 import {
 	Mesh,
